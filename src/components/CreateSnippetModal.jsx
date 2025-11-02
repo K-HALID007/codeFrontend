@@ -47,7 +47,7 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-auto p-6 space-y-4">
+        <div className="flex-1 p-6 space-y-4">
           <div>
             <label className="block text-sm font-semibold text-gray-200 mb-3">
               Snippet Name
@@ -84,7 +84,7 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
                        disabled:cursor-not-allowed text-white rounded-lg 
                        transition-all font-semibold shadow-lg"
           >
-            Create 
+            Create & Open Editor
           </button>
         </div>
       </div>
