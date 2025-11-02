@@ -90,7 +90,7 @@ function SnippetItem({ snippet, isSelected, onSelect, onDelete, onEdit }) {
           onClick={() => setShowDeleteModal(false)}
         >
           <div
-            className="bg-slate-900 border border-slate-700 rounded-lg p-6 max-w-sm shadow-2xl"
+            className="bg-black border border-slate-700 rounded-lg p-6 max-w-sm shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-lg font-semibold text-white mb-2">
