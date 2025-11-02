@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
-import { getLanguageIcon } from "../utils/languageIcons.jsx";
 import { toast } from "react-toastify";
 
 function SnippetItem({ snippet, isSelected, onSelect, onDelete, onEdit }) {
@@ -35,14 +34,6 @@ function SnippetItem({ snippet, isSelected, onSelect, onDelete, onEdit }) {
             : "border-l-transparent hover:bg-dark-hover/50"
         }`}
     >
-      <div
-        className={`text-2xl flex-shrink-0 transition-transform ${
-          isSelected ? "scale-110" : ""
-        }`}
-      >
-        {getLanguageIcon(snippet.language)}
-      </div>
-
       <div className="flex-1 min-w-0">
         <h3
           className={`text-sm font-semibold truncate transition-colors ${

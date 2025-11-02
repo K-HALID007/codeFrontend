@@ -15,6 +15,11 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
     }
   };
 
+  const handleCodeChange = (e) => {
+    const newCode = e.target.value;
+    setCode(newCode);
+  };
+
   const handleCreate = () => {
     if (code.trim()) {
       onCreate({
@@ -82,33 +87,12 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
             <>
               <div>
                 <label className="block text-sm font-semibold text-gray-200 mb-3">
-                  Language
-                </label>
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg 
-                             text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-600 
-                             focus:border-primary-600 transition-all"
-                >
-                  <option value="javascript">JavaScript</option>
-                  <option value="python">Python</option>
-                  <option value="css">CSS</option>
-                  <option value="typescript">TypeScript</option>
-                  <option value="bash">Bash</option>
-                  <option value="html">HTML</option>
-                  <option value="json">JSON</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-200 mb-3">
                   Code
                 </label>
                 <textarea
                   value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  placeholder="Paste your code here..."
+                  onChange={handleCodeChange}
+                  placeholder="Paste your code here... (language will be detected automatically)"
                   className="w-full h-40 px-4 py-3 bg-dark-bg border border-dark-border rounded-lg 
                              text-gray-100 font-mono text-sm placeholder-gray-500
                              focus:outline-none focus:ring-2 focus:ring-primary-600 

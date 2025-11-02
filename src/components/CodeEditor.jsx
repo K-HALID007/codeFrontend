@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { FiCopy, FiSave, FiCheck, FiDownload, FiX } from "react-icons/fi";
 import dynamic from "next/dynamic";
 
-
 // Dynamically import Monaco Editor to avoid SSR issues
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
@@ -34,7 +33,12 @@ function CodeEditor({ snippet, onUpdateSnippet, isEditMode, setIsEditMode }) {
 
   const handleSave = async () => {
     if (snippet) {
-      await onUpdateSnippet(snippet._id, { name, language, code, description });
+      await onUpdateSnippet(snippet._id, {
+        name,
+        language,
+        code,
+        description,
+      });
       setSaved(true);
       setIsEditMode(false);
       setTimeout(() => setSaved(false), 2000);
@@ -73,6 +77,26 @@ function CodeEditor({ snippet, onUpdateSnippet, isEditMode, setIsEditMode }) {
       html: "html",
       typescript: "ts",
       bash: "sh",
+      cpp: "cpp",
+      java: "java",
+      csharp: "cs",
+      php: "php",
+      ruby: "rb",
+      go: "go",
+      rust: "rs",
+      swift: "swift",
+      kotlin: "kt",
+      sql: "sql",
+      json: "json",
+      xml: "xml",
+      yaml: "yml",
+      markdown: "md",
+      lua: "lua",
+      perl: "pl",
+      r: "r",
+      matlab: "m",
+      dart: "dart",
+      c: "c",
     };
     return extensions[lang] || "txt";
   };
@@ -88,6 +112,27 @@ function CodeEditor({ snippet, onUpdateSnippet, isEditMode, setIsEditMode }) {
       json: "json",
       jsx: "javascript",
       tsx: "typescript",
+      cpp: "cpp",
+      java: "java",
+      csharp: "csharp",
+      php: "php",
+      ruby: "ruby",
+      go: "go",
+      rust: "rust",
+      swift: "swift",
+      kotlin: "kotlin",
+      sql: "sql",
+      xml: "xml",
+      yaml: "yaml",
+      markdown: "markdown",
+      lua: "lua",
+      perl: "perl",
+      r: "r",
+      matlab: "matlab",
+      dart: "dart",
+      c: "c",
+      scss: "scss",
+      less: "less",
     };
     return languageMap[lang] || "plaintext";
   };
@@ -134,25 +179,6 @@ function CodeEditor({ snippet, onUpdateSnippet, isEditMode, setIsEditMode }) {
       {/* Toolbar */}
       <div className="flex items-center justify-between px-4 py-3 bg-dark-surface border-b border-dark-border shrink-0">
         <div className="flex items-center gap-4">
-          {isEditMode ? (
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="px-3 py-1.5 bg-dark-bg border border-dark-border rounded-lg 
-                         text-sm text-gray-300 font-medium focus:outline-none focus:ring-2 focus:ring-primary-600"
-            >
-              <option value="javascript">JavaScript</option>
-              <option value="python">Python</option>
-              <option value="css">CSS</option>
-              <option value="html">HTML</option>
-              <option value="typescript">TypeScript</option>
-              <option value="bash">Bash</option>
-            </select>
-          ) : (
-            <span className="px-3 py-1.5 bg-dark-bg border border-dark-border rounded-lg text-sm text-gray-300 font-medium">
-              {language}
-            </span>
-          )}
           <span className="text-xs text-gray-400 bg-dark-bg px-3 py-1 rounded-lg">
             {code.split("\n").length} lines • {code.length} chars
           </span>
@@ -210,7 +236,7 @@ function CodeEditor({ snippet, onUpdateSnippet, isEditMode, setIsEditMode }) {
         </div>
       </div>
 
-      {/* Code Display Area - UPDATED TO BLACK */}
+      {/* Code Display Area */}
       <div className="flex-1 overflow-hidden bg-black">
         <MonacoEditor
           height="100%"
