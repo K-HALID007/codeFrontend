@@ -84,7 +84,7 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
                        disabled:cursor-not-allowed text-white rounded-lg 
                        transition-all font-semibold shadow-lg"
           >
-            Create & Open Editor
+            Create
           </button>
         </div>
       </div>
