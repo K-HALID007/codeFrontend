@@ -33,9 +33,14 @@ export default function Home() {
 
   const createSnippet = async (snippetData) => {
     try {
-      const response = await snippetAPI.create(snippetData);
+      const dataToSend = {
+        ...snippetData,
+        code: snippetData.code || "// Start coding here\n",
+      };
+      const response = await snippetAPI.create(dataToSend);
       setSnippets([response.data, ...snippets]);
       setSelectedSnippet(response.data);
+      setIsEditMode(true); // Auto-enter edit mode for new snippets
     } catch (err) {
       console.error("Error creating snippet:", err);
     }

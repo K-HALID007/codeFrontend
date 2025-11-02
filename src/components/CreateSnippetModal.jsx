@@ -4,34 +4,23 @@ import React, { useState } from "react";
 import { FiX } from "react-icons/fi";
 
 export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
-  const [step, setStep] = useState(1);
   const [name, setName] = useState("");
-  const [language, setLanguage] = useState("javascript");
-  const [code, setCode] = useState("");
 
-  const handleNext = () => {
-    if (name.trim()) {
-      setStep(2);
+  const handleNameKeyPress = (e) => {
+    if (e.key === "Enter" && name.trim()) {
+      handleCreate();
     }
   };
 
-  const handleCodeChange = (e) => {
-    const newCode = e.target.value;
-    setCode(newCode);
-  };
-
   const handleCreate = () => {
-    if (code.trim()) {
+    if (name.trim()) {
       onCreate({
         name,
-        language,
-        code,
+        language: "javascript",
+        code: "",
         description: "",
       });
-      setStep(1);
       setName("");
-      setCode("");
-      setLanguage("javascript");
       onClose();
     }
   };
@@ -42,12 +31,12 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
     <div className="fixed inset-0 w-screen h-screen backdrop-blur flex items-center justify-center z-50">
       <div
         className="bg-dark-surface bg-opacity-95 backdrop-blur-lg border border-dark-border 
-                      rounded-2xl shadow-2xl w-full max-w-2xl max-h-[500px] flex flex-col"
+                      rounded-2xl shadow-2xl w-full max-w-2xl max-h-[300px] flex flex-col"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-dark-border bg-dark-bg bg-opacity-50">
           <h2 className="text-2xl font-bold text-gray-100">
-            {step === 1 ? "Snippet Name" : "Paste Your Code"}
+            Create New Snippet
           </h2>
           <button
             onClick={onClose}
@@ -59,81 +48,43 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
 
         {/* Content */}
         <div className="flex-1 overflow-auto p-6 space-y-4">
-          {step === 1 ? (
-            // Step 1: Ask for Name
-            <>
-              <div>
-                <label className="block text-sm font-semibold text-gray-200 mb-3">
-                  Snippet Name
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g., React Hook Logic, API Call..."
-                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg 
-                             text-gray-100 placeholder-gray-500
-                             focus:outline-none focus:ring-2 focus:ring-primary-600 
-                             focus:border-primary-600 transition-all"
-                  autoFocus
-                />
-              </div>
-              <p className="text-sm text-gray-400 mt-3">
-                Give your snippet a descriptive name to find it easily later.
-              </p>
-            </>
-          ) : (
-            // Step 2: Ask for Code
-            <>
-              <div>
-                <label className="block text-sm font-semibold text-gray-200 mb-3">
-                  Code
-                </label>
-                <textarea
-                  value={code}
-                  onChange={handleCodeChange}
-                  placeholder="Paste your code here... (language will be detected automatically)"
-                  className="w-full h-40 px-4 py-3 bg-dark-bg border border-dark-border rounded-lg 
-                             text-gray-100 font-mono text-sm placeholder-gray-500
-                             focus:outline-none focus:ring-2 focus:ring-primary-600 
-                             focus:border-primary-600 resize-none transition-all"
-                  autoFocus
-                />
-              </div>
-            </>
-          )}
+          <div>
+            <label className="block text-sm font-semibold text-gray-200 mb-3">
+              Snippet Name
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyPress={handleNameKeyPress}
+              placeholder="e.g., React Hook Logic, API Call..."
+              className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg 
+                         text-gray-100 placeholder-gray-500
+                         focus:outline-none focus:ring-2 focus:ring-primary-600 
+                         focus:border-primary-600 transition-all"
+              autoFocus
+            />
+          </div>
         </div>
 
         {/* Footer */}
         <div className="flex items-center justify-between p-6 border-t border-dark-border bg-dark-bg bg-opacity-50">
           <button
-            onClick={() => {
-              if (step === 2) {
-                setStep(1);
-              } else {
-                onClose();
-              }
-            }}
+            onClick={onClose}
             className="px-6 py-2 border border-dark-border text-gray-300 rounded-lg 
                        hover:bg-dark-hover hover:text-gray-100 transition-all font-medium"
           >
-            {step === 1 ? "Cancel" : "Back"}
+            Cancel
           </button>
 
           <button
-            onClick={() => {
-              if (step === 1) {
-                handleNext();
-              } else {
-                handleCreate();
-              }
-            }}
-            disabled={step === 1 ? !name.trim() : !code.trim()}
+            onClick={handleCreate}
+            disabled={!name.trim()}
             className="px-6 py-2 bg-primary-600 hover:bg-primary-700 disabled:opacity-50 
                        disabled:cursor-not-allowed text-white rounded-lg 
                        transition-all font-semibold shadow-lg"
           >
-            {step === 1 ? "Next" : "Create"}
+            Create 
           </button>
         </div>
       </div>
