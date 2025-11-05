@@ -27,11 +27,11 @@ function SnippetItem({ snippet, isSelected, onSelect, onDelete, onEdit }) {
   return (
     <div
       onClick={onSelect}
-      className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200 border-l-4
+      className={`flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-all duration-300 border-2 mb-2
         ${
           isSelected
-            ? "bg-gradient-to-r from-primary-600/20 to-transparent border-l-primary-600 shadow-lg shadow-primary-500/20"
-            : "border-l-transparent hover:bg-dark-hover/50"
+            ? "bg-linear-to-r from-blue-600/15 via-transparent to-transparent border-blue-500/60 shadow-lg shadow-blue-500/30"
+            : "bg-dark-surface/30 border-gray-700/40 hover:border-gray-600/60 hover:bg-dark-surface/50"
         }`}
     >
       <div className="flex-1 min-w-0">
@@ -42,37 +42,29 @@ function SnippetItem({ snippet, isSelected, onSelect, onDelete, onEdit }) {
         >
           {snippet.name}
         </h3>
-        <p
-          className={`text-xs truncate transition-colors ${
-            isSelected ? "text-primary-200/70" : "text-gray-400"
-          }`}
-        >
-          {snippet.language} • {snippet.code?.split("\n").length || 0} lines
-        </p>
       </div>
 
-      {/* Edit & Delete Buttons - Only When Selected */}
       {isSelected && (
-        <div className="flex gap-1 flex-shrink-0">
+        <div className="flex gap-1 shrink-0">
           <button
             onClick={handleEdit}
-            className="p-1.5 hover:bg-blue-600 hover:text-white text-gray-400 rounded transition-all cursor-pointer"
+            className="p-2 hover:bg-blue-500/30 hover:text-blue-300 text-gray-400 rounded-md transition-all cursor-pointer border border-transparent hover:border-blue-500/40"
             title="Edit"
           >
-            <FiEdit2 size={16} />
+            <FiEdit2 size={18} />
           </button>
           <button
             onClick={handleDelete}
-            className="p-1.5 hover:bg-red-600 hover:text-white text-gray-400 rounded transition-all cursor-pointer"
+            className="p-2 hover:bg-red-500/30 hover:text-red-300 text-gray-400 rounded-md transition-all cursor-pointer border border-transparent hover:border-red-500/40"
             title="Delete"
           >
-            <FiTrash2 size={16} />
+            <FiTrash2 size={18} />
           </button>
         </div>
       )}
 
       {isSelected && (
-        <div className="flex-shrink-0 w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
+        <div className="shrink-0 w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
       )}
 
       {showDeleteModal && (
