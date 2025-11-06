@@ -13,16 +13,17 @@ export default function CreateSnippetModal({ isOpen, onClose, onCreate }) {
   };
 
   const handleCreate = () => {
-    if (name.trim()) {
-      onCreate({
-        name,
-        language: "javascript",
-        code: "",
-        description: "",
-      });
-      setName("");
-      onClose();
+    if (!name.trim()) {
+      alert("Please enter a snippet name");
+      return;
     }
+
+    onCreate({
+      name: name.trim(),
+    });
+
+    setName("");
+    onClose();
   };
 
   if (!isOpen) return null;

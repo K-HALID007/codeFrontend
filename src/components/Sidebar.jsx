@@ -2,9 +2,14 @@
 
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import { io } from "socket.io-client";
 import SearchBar from "./SearchBar";
 import SnippetItem from "./SnippetItem";
 import CreateSnippetModal from "./CreateSnippetModal";
+
+const socket = io(
+  process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:5000"
+);
 
 export default function Sidebar({
   snippets,
