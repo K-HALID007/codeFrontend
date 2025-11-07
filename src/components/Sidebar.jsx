@@ -50,7 +50,15 @@ export default function Sidebar({
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto scrollbar-thin px-4 pb-4">
+        {/* 📜 Snippet List with Custom Scrollbar */}
+        <div
+          className="flex-1 overflow-y-auto px-4 pb-4 
+                     scrollbar-thin scrollbar-thumb-gray-700 
+                     hover:scrollbar-thumb-gray-600 
+                     scrollbar-track-transparent
+                     scrollbar-thumb-rounded-full
+                     transition-colors duration-200"
+        >
           <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
             Snippets ({snippets?.length || 0})
           </h2>
